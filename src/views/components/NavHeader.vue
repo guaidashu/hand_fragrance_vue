@@ -20,7 +20,7 @@
 
                                 <div style="height: 100%; width: 100%;display: flex; justify-content: flex-end; align-items: center">
                                     <a href="/login">登录</a>
-                                    <a class="btn-end" href="http://www.yushu.im/register">注册</a>
+                                    <a class="btn-end" href="/register">注册</a>
                                 </div>
 
                             </div>

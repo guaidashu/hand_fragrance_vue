@@ -24,9 +24,20 @@ const router = new Router({
             },
         },
         {
+            path: '/register',
+            name: 'register',
+            component: () => import("../views/login/register"),
+            meta: {
+                title: '注册账户',
+            }
+        },
+        {
             path: '/wish',
             name: 'wish',
-            component: () => import("../views/index/wish")
+            component: () => import("../views/index/wish"),
+            meta: {
+                title: '心愿清单'
+            }
         },
     ]
 })
