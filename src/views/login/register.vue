@@ -128,7 +128,7 @@
                         // }
                         console.log(data.result)
                     } else {
-                        this.$Message.error("注册失败，请稍后再试")
+                        this.$Message.error(data.msg)
                     }
                 })
             }

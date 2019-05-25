@@ -88,7 +88,7 @@
                             name: "index"
                         })
                     } else {
-                        this.$Message.error("用户名或密码错误")
+                        this.$Message.error(data.msg)
                     }
                 })
             }
