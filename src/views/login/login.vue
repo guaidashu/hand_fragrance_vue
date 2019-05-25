@@ -82,7 +82,7 @@
                 }
                 login(this.form).then(res => {
                     let data = res.data
-                    if (data.status === 0) {
+                    if (data.code === 0) {
                         console.log("登录成功")
                         this.$router.push({
                             name: "index"

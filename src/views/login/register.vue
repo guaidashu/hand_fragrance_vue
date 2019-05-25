@@ -117,15 +117,16 @@
             register() {
                 register(this.form).then(res => {
                     let data = res.data
-                    if (data.status === 0) {
+                    if (data.code === 0) {
                         this.$Message.success("注册成功")
-                        this.form = {
-                            nickName: '',
-                            password: '',
-                            phone: '',
-                            rePassword: '',
-                            email: ''
-                        }
+                        // this.form = {
+                        //     nickName: '',
+                        //     password: '',
+                        //     phone: '',
+                        //     rePassword: '',
+                        //     email: ''
+                        // }
+                        console.log(data.result)
                     } else {
                         this.$Message.error("注册失败，请稍后再试")
                     }

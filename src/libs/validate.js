@@ -4,7 +4,7 @@ let validate = {
         return reg.test(email)
     },
     phoneValidate(phone) {
-        let isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
+        let isPhone = /^[1][3,4,5,7,8][0-9]{9}$/;
         return isPhone.test(phone)
     }
 };
