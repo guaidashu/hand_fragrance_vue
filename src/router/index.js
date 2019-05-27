@@ -39,6 +39,14 @@ const router = new Router({
                 title: '心愿清单'
             }
         },
+        {
+            path: '/gifts',
+            name: 'gifts',
+            component: () => import("../views/index/gifts"),
+            meta: {
+                title: '赠送清单'
+            }
+        }
     ]
 })
 

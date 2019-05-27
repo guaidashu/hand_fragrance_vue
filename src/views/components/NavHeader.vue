@@ -40,10 +40,10 @@
                         </router-link>
                     </div>
                     <div class="col-md-2 col-xs-3">
-                        <a id="gifts" href="http://www.yushu.im/my/gifts" class="flex-vertical-hor-center">
+                        <router-link id="gifts" class="flex-vertical-hor-center" :class="{'linking': linking === 'gifts'}" to="/gifts">
                             <img src="/static/images/index/gift.png">
                             <span>赠送清单</span>
-                        </a>
+                        </router-link>
                     </div>
                     <div class="col-md-2 col-xs-3">
                         <router-link id="wishes" class="flex-vertical-hor-center" :class="{'linking': linking === 'wish'}" to="/wish">
