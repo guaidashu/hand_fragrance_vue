@@ -34,31 +34,35 @@
                 <div class="row">
                     <div class="col-md-2 col-xs-3 col-md-offset-2">
 
-                        <router-link id="recent" class="flex-vertical-hor-center" :class="{'linking': linking === 'index'}" to="/">
+                        <router-link id="recent" class="flex-vertical-hor-center"
+                                     :class="{'linking': linking === 'index'}" to="/">
                             <img src="/static/images/index/upload.png">
                             <span>最近上传</span>
                         </router-link>
                     </div>
                     <div class="col-md-2 col-xs-3">
-                        <router-link id="gifts" class="flex-vertical-hor-center" :class="{'linking': linking === 'gifts'}" to="/gifts">
+                        <router-link id="gifts" class="flex-vertical-hor-center"
+                                     :class="{'linking': linking === 'gifts'}" to="/gifts">
                             <img src="/static/images/index/gift.png">
                             <span>赠送清单</span>
                         </router-link>
                     </div>
                     <div class="col-md-2 col-xs-3">
-                        <router-link id="wishes" class="flex-vertical-hor-center" :class="{'linking': linking === 'wish'}" to="/wish">
+                        <router-link id="wishes" class="flex-vertical-hor-center"
+                                     :class="{'linking': linking === 'wish'}" to="/wish">
                             <img src="/static/images/index/wish.png">
                             <span>心愿清单</span>
                         </router-link>
-<!--                        <a id="wishes" href="http://www.yushu.im/my/wish" class="flex-vertical-hor-center">-->
-<!--                            -->
-<!--                        </a>-->
+                        <!--                        <a id="wishes" href="http://www.yushu.im/my/wish" class="flex-vertical-hor-center">-->
+                        <!--                            -->
+                        <!--                        </a>-->
                     </div>
                     <div class="col-md-2 col-xs-3">
-                        <a id="pending" href="http://www.yushu.im/pending" class="flex-vertical-hor-center">
+                        <router-link id="pending" class="flex-vertical-hor-center"
+                                     :class="{'linking': linking === 'pending'}" to="/pending">
                             <img src="/static/images/index/fish.png">
-                            <span>鱼漂</span>
-                        </a>
+                            <span>交易记录</span>
+                        </router-link>
                     </div>
                 </div>
             </div>

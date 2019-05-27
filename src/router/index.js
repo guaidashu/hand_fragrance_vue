@@ -46,6 +46,14 @@ const router = new Router({
             meta: {
                 title: '赠送清单'
             }
+        },
+        {
+            path: '/pending',
+            name: 'pending',
+            component: () => import("../views/index/pending"),
+            meta: {
+                title: '交易记录'
+            }
         }
     ]
 })
