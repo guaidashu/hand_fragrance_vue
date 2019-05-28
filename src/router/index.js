@@ -54,7 +54,15 @@ const router = new Router({
             meta: {
                 title: '交易记录'
             }
-        }
+        },
+        {
+            path: '/drift',
+            name: 'drift',
+            component: () => import("../views/index/drift"),
+            meta: {
+                title: '书籍求取'
+            }
+        },
     ]
 })
 

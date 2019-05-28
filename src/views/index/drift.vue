@@ -1,0 +1,106 @@
+<template>
+    <div>
+        <nav-header :linking="'drift'"></nav-header>
+        <div class='container'>
+            <div class="row">
+            </div>
+            <div style="margin-top:15px;" class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="row">
+                    </div>
+                    <div class="bg-container">
+                        <div class="row">
+                            <div class="col-md-12 text-center bg-head">
+                        <span class="drift-title">向<span
+                                class="space">杰西</span>请求这本书</span>
+                            </div>
+                        </div>
+                        <div style="margin-top:15px;" class="row">
+                            <div class="col-md-10 col-md-offset-1 flex-vertical gifter-container">
+                                <span class="sub-title-color">以下是书籍拥有者信息，诚信度供你参考:</span>
+                                <span style="margin-top:10px; margin-bottom:10px;">杰西</span>
+                                <div><span
+                                        class="description-font">鱼豆：</span><span>1.0</span>
+                                </div>
+                                <div><span
+                                        class="description-font">接受/送出书籍：</span><span>0/0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top:10px;" class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <span class="main-color">本次交易将消耗你1个鱼豆，你当前还有1.0个鱼豆</span>
+                            </div>
+                        </div>
+                        <form action="" method="post">
+                            <div style="margin-top:20px;" class="row">
+                                <div class="col-md-10 col-md-offset-1 flex-vertical input-margin">
+                                    <label class="sub-title-color" for="recipient_name">收件人姓名</label>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <input placeholder="请填写收件人姓名" id="recipient_name"
+                                                   name="recipient_name"
+                                                   class="normal-input btn-block form-control"
+                                                   value="">
+                                        </div>
+                                    </div>
+                                    <label class="sub-title-color" for="mobile">联系电话</label>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <input placeholder="如13818181818" id="mobile"
+                                                   name="mobile"
+                                                   class="normal-input btn-block form-control"
+                                                   value="">
+                                        </div>
+                                    </div>
+                                    <label class="sub-title-color" for="address">书籍收件地址</label>
+                                    <textarea class="form-control" rows="3" id="address" name="address"
+                                              placeholder="如，张三 北京市清华大学666室。请务必确保该地址能够收到书籍"></textarea>
+                                    <label class="sub-title-color" for="message">对他 / 她
+                                        说的话</label>
+                                    <textarea class="form-control" id="message" name="message"
+                                              rows="4"
+                                              placeholder="如有一些特别的要求，可以在这里填写"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div style="position: relative;left:-20px;"
+                                     class="col-md-5 col-md-offset-4 flex-vertical text-center">
+                                    <input style="margin-top:12px;" type="submit"
+                                           class="btn btn-big btn-block" value="提交">
+                                    <span style="margin-top:15px;"
+                                          class="main-color">提交信息，等待杰西将书籍邮寄给你</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <nav-footer></nav-footer>
+    </div>
+</template>
+
+<script>
+    import NavHeader from "../components/NavHeader";
+    import NavFooter from "../components/NavFooter";
+
+    export default {
+        name: "drift",
+        components: {NavFooter, NavHeader}
+    }
+</script>
+
+<style scoped>
+    .drift-title {
+        font-size: 29px;
+        color: #ffffff;
+        line-height: 70px;
+    }
+
+    .gifter-container {
+        padding: 15px;
+        background-color: #f2f5f7;
+    }
+</style>
