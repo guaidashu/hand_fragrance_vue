@@ -63,6 +63,14 @@ const router = new Router({
                 title: '书籍求取'
             }
         },
+        {
+            path: '/detail',
+            name: 'detail',
+            component: () => import("../views/index/detail"),
+            meta: {
+                title: '书籍详情页'
+            }
+        }
     ]
 })
 
