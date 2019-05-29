@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 引入路由
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
     mode: "history",
@@ -70,14 +70,22 @@ const router = new Router({
             meta: {
                 title: '书籍详情页'
             }
+        },
+        {
+            path: '/search',
+            name: 'search',
+            component: () => import("../views/index/search"),
+            meta: {
+                title: '搜索结果'
+            }
         }
     ]
-})
+});
 
 // 设置页面标题读取
 router.beforeEach((to, from, next) => {
     window.document.title = to.meta.title;
     next()
-})
+});
 
 export default router

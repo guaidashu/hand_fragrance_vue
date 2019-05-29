@@ -2,7 +2,7 @@
     <div>
         <div class="nav-self">
             <div style="padding-top: inherit" class="container">
-                <form class="form-inline" action="http://www.yushu.im/book/search" method="get">
+                <form class="form-inline" action="/search" method="get">
                     <div class="flex-vertical-center-height">
                         <div class="col-md-2  col-xs-3 logo">
                             <img src="/static/images/index/logo-yushu.png" width="69px" height="46px">

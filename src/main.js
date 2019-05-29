@@ -5,14 +5,16 @@ import App from './App'
 import router from './router'
 import 'iview/dist/styles/iview.css';
 import iview from 'iview'
+import {currency} from "./util/currency";
 
 Vue.use(iview)
+Vue.filter("currency", currency)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    components: {App},
+    template: '<App/>'
 })
