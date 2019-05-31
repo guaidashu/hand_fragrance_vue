@@ -160,6 +160,7 @@
 <script>
     import NavHeader from "../components/NavHeader";
     import NavFooter from "../components/NavFooter";
+    import '../../../static/css/bootstrap.min.css';
 
     export default {
         name: "detail",
@@ -168,20 +169,6 @@
 </script>
 
 <style scoped>
-    /*
- *  Remodal - v1.1.1
- *  Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
- *  http://vodkabears.github.io/remodal/
- *
- *  Made by Ilya Makarov
- *  Under MIT License
- */
-
-    /* ==========================================================================
-       Remodal's necessary styles
-       ========================================================================== */
-
-    /* Hide scroll bar */
 
     html.remodal-is-locked {
         overflow: hidden;

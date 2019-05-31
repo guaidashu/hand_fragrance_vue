@@ -27,21 +27,27 @@
                     </div>
                 </a>
             </div>
+            <div style="width: 100%; height: 30px;"></div>
+            <Page :total="books.total" :current="page" @on-change="p => {this.page = p}" :page-size="pageSize"></Page>
         </div>
+        <nav-footer></nav-footer>
     </div>
 </template>
 
 <script>
     import NavHeader from "../components/NavHeader";
+    import '../../../static/css/bootstrap.min.css';
     import {searchBooks} from "../../../api/books";
+    import NavFooter from "../components/NavFooter";
 
     export default {
         name: "search",
-        components: {NavHeader},
+        components: {NavFooter, NavHeader},
         data() {
             return {
                 books: [],
-                page: 1
+                page: 1,
+                pageSize: 15
             }
         },
         methods: {
@@ -63,8 +69,11 @@
                 })
             }
         },
+        watch: {
+            'page': 'init'
+        },
         mounted() {
-            this.init()
+            // this.init()
         }
     }
 </script>
