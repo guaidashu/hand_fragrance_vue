@@ -15,14 +15,13 @@
             </div>
             <hr>
             <div class="row col-padding" v-for="(book, index) in books.books" :key="index">
-                <a href="" class="">
+                <a href="javascript:;" class="" @click="goDetail(book)">
                     <div class="col-md-2">
                         <img class="book-img-small shadow" :src="book.image">
                     </div>
                     <div class="col-md-7 flex-vertical description-font">
                         <span class="title">{{ book.title }}</span>
-                        <span>{{ book.author.join(', ') }} / {{book.publisher}} / {{book.price | currency('￥') }}</span>
-                        <span>{{book.intro}}</span>
+                        <span>{{ book.author.join(', ') + ' / ' }}{{book.publisher + ' / '}}{{book.price | currency('￥') }}</span>
                         <span class="summary">{{ book.summary }}</span>
                     </div>
                 </a>
@@ -67,13 +66,22 @@
                         this.$Message.error(data.msg)
                     }
                 })
+            },
+            goDetail(book) {
+                console.log(book)
+                this.$router.push({
+                    path: '/detail',
+                    query: {
+                        isbn: book.isbn
+                    }
+                })
             }
         },
         watch: {
             'page': 'init'
         },
         mounted() {
-            // this.init()
+            this.init()
         }
     }
 </script>

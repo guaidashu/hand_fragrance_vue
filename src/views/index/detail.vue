@@ -7,40 +7,40 @@
 
             <div class="row book-container my-detail-row" style="width: 100%">
                 <div class="col-md-2">
-                    <img class="book-img" src="https://img1.doubanio.com/lpic/s1738888.jpg"/>
+                    <img class="book-img" :src="book.image"/>
                 </div>
                 <div class="col-md-5 flex-vertical detail-con">
                     <div>
-                        <h4>东京奇谭集</h4>
+                        <h4>{{book.title}}</h4>
                     </div>
                     <div class="description-font-margin">
                         <div>
                             <span>作者:</span>
-                            <span>[日]村上春树</span>
+                            <span>{{ getAuthor(book.author) }}</span>
                         </div>
                         <div>
                             <span>出版社:</span>
-                            <span>上海译文出版社</span>
+                            <span>{{book.publisher}}</span>
                         </div>
                         <div>
                             <span>出版年：</span>
-                            <span>2006-7</span>
+                            <span>{{book.pubdate}}</span>
                         </div>
                         <div>
                             <span>页数：</span>
-                            <span>148</span>
+                            <span>{{book.pages}}</span>
                         </div>
                         <div>
                             <span>定价：</span>
-                            <span>￥13.00元</span>
+                            <span>{{book.price | currency('￥')}}元</span>
                         </div>
                         <div>
                             <span>精装：</span>
-                            <span>平装</span>
+                            <span>{{book.binding}}</span>
                         </div>
                         <div>
                             <span>ISBN：</span>
-                            <span id="isbn">9787532740536</span>
+                            <span id="isbn">{{book.isbn}}</span>
                         </div>
 
                         <div class="color-count">
@@ -73,7 +73,8 @@
             <div style="margin-top:15px;" class="row">
                 <div class="col-md-11">
                     <p class="description-font">
-                        《东京奇谭集》收有五部短篇小说，分别为《偶然的旅人》、《哈纳莱伊湾》、《在可能找见的地方，无论哪里》、《天天移动的肾脏石块》和《品川猴》。五篇奇谭中最奇的是最后一篇《品川猴》。一个叫安藤瑞纪的年轻女子得了一种“忘名症”，每星期有一两次想不起自己的名字，几经周折，查明“忘名症”起因于一只猴……虽说是“奇谭”，但村上春树在小说中讨论的仍然是形而上的人生问题。\n谭通谈，奇谭即奇谈、奇闻之意。众所周知，村上小说的篇名大多声东击西，避实就虚，而这部短篇集却表里如一，果然是发生在东京的奇谭。小说通过偶然性突出了人生命运的神秘感。\n在这部短篇集里，村上春树一如既往，依然在不动声色地拆除着现实与非现实或此岸世界与彼岸世界之间的篱笆，依然像鹰一样在潜意识王国上空盘旋着，寻找更深更暗的底层，依然力图从庸常的世俗生活中剥离出灵魂信息和人性机微。</p>
+                        {{book.summary}}
+                    </p>
                 </div>
             </div>
 
@@ -161,10 +162,43 @@
     import NavHeader from "../components/NavHeader";
     import NavFooter from "../components/NavFooter";
     import '../../../static/css/bootstrap.min.css';
+    import {getBookInfo} from "../../../api/books";
 
     export default {
         name: "detail",
-        components: {NavFooter, NavHeader}
+        components: {NavFooter, NavHeader},
+        data() {
+            return {
+                book: {}
+            }
+        },
+        methods: {
+            init() {
+                this.getBookInfo()
+            },
+            getBookInfo() {
+                let isbn = this.$route.query.isbn
+                getBookInfo({isbn: isbn}).then(res => {
+                    let data = res.data
+                    if (data.code === 0) {
+                        this.book = data.result
+                        console.log(this.book)
+                    } else {
+                        this.$Message.error(data.msg)
+                    }
+                })
+            },
+            getAuthor(author) {
+                try {
+                    return author.join(', ')
+                } catch (e) {
+
+                }
+            }
+        },
+        mounted() {
+            this.init()
+        }
     }
 </script>
 
