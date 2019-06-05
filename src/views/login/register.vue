@@ -3,14 +3,14 @@
         <NavHeader></NavHeader>
         <div class="register_container">
             <Form ref="formCustom" :model="form" :rules="formRule">
-                <FormItem label="昵称" prop="nickName">
-                    <Input type="text" v-model="form.nickName" placeholder="请输入昵称"></Input>
+                <FormItem label="昵称" prop="nickname">
+                    <Input type="text" v-model="form.nickname" placeholder="请输入昵称"></Input>
                 </FormItem>
-                <FormItem label="电话" prop="phone">
-                    <Input type="text" v-model="form.phone" placeholder="请输入电话"></Input>
+                <FormItem label="电话" prop="phone_number">
+                    <Input type="text" v-model="form.phone_number" placeholder="请输入电话"></Input>
                 </FormItem>
                 <FormItem label="邮箱" prop="email">
-                    <Input type="text" v-model="form.email" placeholder="请输入邮箱"></Input>
+                    <Input type="email" v-model="form.email" placeholder="请输入邮箱"></Input>
                 </FormItem>
                 <FormItem label="密码" prop="password">
                     <Input type="password" v-model="form.password" placeholder="请输入密码"></Input>
@@ -88,9 +88,9 @@
             };
             return {
                 form: {
-                    nickName: '',
+                    nickname: '',
                     password: '',
-                    phone: '',
+                    phone_number: '',
                     rePassword: '',
                     email: ''
                 },
@@ -98,13 +98,13 @@
                     password: [
                         {required: true, validator: validatePassword, trigger: 'blur'}
                     ],
-                    nickName: [
+                    nickname: [
                         {required: true, validator: validateUserName, trigger: 'blur'}
                     ],
                     rePassword: [
                         {required: true, validator: validateRePassword, trigger: 'blur'}
                     ],
-                    phone: [
+                    phone_number: [
                         {required: true, validator: validatePhone, trigger: 'blur'}
                     ],
                     email: [
@@ -119,6 +119,9 @@
                     let data = res.data
                     if (data.code === 0) {
                         this.$Message.success("注册成功")
+                        this.$router.push({
+                            path: '/login'
+                        })
                         // this.form = {
                         //     nickName: '',
                         //     password: '',
@@ -128,7 +131,11 @@
                         // }
                         console.log(data.result)
                     } else {
-                        this.$Message.error(data.msg)
+                        for (let i in data.msg) {
+                            for (let j = 0; j < data.msg[i].length; j++) {
+                                this.$Message.error(data.msg[i][j])
+                            }
+                        }
                     }
                 })
             }
