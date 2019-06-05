@@ -161,7 +161,6 @@
 <script>
     import NavHeader from "../components/NavHeader";
     import NavFooter from "../components/NavFooter";
-    import '../../../static/css/bootstrap.min.css';
     import {getBookInfo} from "../../../api/books";
 
     export default {
@@ -203,7 +202,9 @@
 </script>
 
 <style scoped>
-
+    @import "../../../static/css/bootstrap.min.css";
+    @import '../../../static/css/index.css';
+    @import '../../../static/css/base.css';
     html.remodal-is-locked {
         overflow: hidden;
 

@@ -35,7 +35,6 @@
 
 <script>
     import NavHeader from "../components/NavHeader";
-    import '../../../static/css/bootstrap.min.css';
     import {searchBooks} from "../../../api/books";
     import NavFooter from "../components/NavFooter";
 
@@ -87,6 +86,9 @@
 </script>
 
 <style scoped>
+    @import "../../../static/css/bootstrap.min.css";
+    @import '../../../static/css/index.css';
+    @import '../../../static/css/base.css';
     .col-padding {
         padding-top: 50px;
     }

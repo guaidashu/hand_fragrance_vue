@@ -80,17 +80,18 @@
                     this.$Message.error("请输入用户名和密码")
                     return
                 }
-                login(this.form).then(res => {
-                    let data = res.data
-                    if (data.code === 0) {
-                        console.log("登录成功")
-                        this.$router.push({
-                            name: "index"
-                        })
-                    } else {
-                        this.$Message.error(data.msg)
-                    }
-                })
+                console.log(this.$store.state.user.fromUrl)
+                // login(this.form).then(res => {
+                //     let data = res.data
+                //     if (data.code === 0) {
+                //         console.log("登录成功")
+                //         this.$router.push({
+                //             name: "index"
+                //         })
+                //     } else {
+                //         this.$Message.error(data.msg)
+                //     }
+                // })
             }
         },
         mounted: function () {

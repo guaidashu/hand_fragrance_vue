@@ -71,10 +71,6 @@
 </template>
 
 <script>
-    import '../../../static/css/bootstrap.min.css'
-    import '../../../static/css/base.css'
-    import '../../../static/css/index.css'
-
     export default {
         props: ['linking'],
         name: "NavHeader"
@@ -82,5 +78,7 @@
 </script>
 
 <style scoped>
-
+    @import "../../../static/css/bootstrap.min.css";
+    @import '../../../static/css/base.css';
+    @import '../../../static/css/index.css';
 </style>
