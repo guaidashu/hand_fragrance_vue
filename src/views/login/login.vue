@@ -11,7 +11,7 @@
                 <div class="log_user_container">
                     <label id="log_user_label" for="log_user">
                     </label>
-                    <input type="text" v-model="form.userName" name="name" id="log_user" placeholder="账号/手机号"/>
+                    <input type="text" v-model="form.email" name="email" id="log_user" placeholder="账号/手机号"/>
                 </div>
                 <!-- 密码 -->
                 <div class="log_password_container">
@@ -48,7 +48,7 @@
                         <a href="">忘记密码</a>
                     </p>
                     <p class="log_login">
-                        <a href="#">注册账号</a>
+                        <router-link to="/register">注册账号</router-link>
                     </p>
                 </div>
             </div>
@@ -69,29 +69,30 @@
         data() {
             return {
                 form: {
-                    userName: '',
+                    email: '',
                     password: ''
                 }
             }
         },
         methods: {
             login() {
-                if (!this.form.userName || !this.form.password) {
+                if (!this.form.email || !this.form.password) {
                     this.$Message.error("请输入用户名和密码")
                     return
                 }
-                console.log(this.$store.state.user.fromUrl)
-                // login(this.form).then(res => {
-                //     let data = res.data
-                //     if (data.code === 0) {
-                //         console.log("登录成功")
-                //         this.$router.push({
-                //             name: "index"
-                //         })
-                //     } else {
-                //         this.$Message.error(data.msg)
-                //     }
-                // })
+                login(this.form).then(res => {
+                    let data = res.data
+                    if (data.code === 0) {
+                        console.log("登录成功")
+                        console.log(data.result)
+                        this.$router.push({
+                            path: this.$store.state.user.fromUrl,
+                            query: this.$store.state.user.fromQuery
+                        })
+                    } else {
+                        this.$Message.error(data.msg)
+                    }
+                })
             }
         },
         mounted: function () {

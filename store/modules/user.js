@@ -5,6 +5,7 @@ export default {
     state: {
         userId: '',
         fromUrl: '',
+        fromQuery: {},
         // 存储到
         session: getToken()
     },
@@ -13,8 +14,11 @@ export default {
             state.userId = userId
         },
         setFromUrl(state, fromUrl) {
-            console.log(fromUrl)
             state.fromUrl = fromUrl
+        },
+        setFromQuery(state, query) {
+            state.fromQuery = query
+            console.log(query)
         }
     },
     getters: {},
