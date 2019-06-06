@@ -84,11 +84,18 @@
                     let data = res.data
                     if (data.code === 0) {
                         console.log("登录成功")
-                        console.log(data.result)
-                        this.$router.push({
-                            path: this.$store.state.user.fromUrl,
-                            query: this.$store.state.user.fromQuery
-                        })
+                        this.$store.dispatch("getUserInfo")
+                        if (!this.$store.state.user.fromUrl) {
+                            this.$router.push({
+                                path: '/'
+                            })
+                        }else {
+                            this.$router.push({
+                                path: this.$store.state.user.fromUrl,
+                                query: this.$store.state.user.fromQuery
+                            })
+                        }
+
                     } else {
                         this.$Message.error(data.msg)
                     }
@@ -100,4 +107,3 @@
         }
     }
 </script>
-`

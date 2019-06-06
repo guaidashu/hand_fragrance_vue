@@ -18,7 +18,7 @@ router.beforeEach((to, from, next) => {
     // 路由拦截(登录拦截)
     let url = to.fullPath.trim()
     // 如果已经登录， 则不允许进入登录页面
-    if (check.checkLogin()) {
+    if (check.checkLogin(store)) {
         if (url == '/login') {
             next({path: '/'})
         }

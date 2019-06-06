@@ -18,7 +18,11 @@
 
                             <div class="container-height flex-vertical-center login-box">
 
-                                <div style="height: 100%; width: 100%;display: flex; justify-content: flex-end; align-items: center">
+                                <div style="height: 100%; width: 100%;display: flex; justify-content: flex-end; align-items: center" v-if="userId">
+                                    <a href="javascript:;">{{userInfo.nickname}}</a>
+                                    <a class="btn-end" href="javascript:;">退出</a>
+                                </div>
+                                <div style="height: 100%; width: 100%;display: flex; justify-content: flex-end; align-items: center" v-else>
                                     <a href="/login">登录</a>
                                     <a class="btn-end" href="/register">注册</a>
                                 </div>
@@ -73,7 +77,17 @@
 <script>
     export default {
         props: ['linking'],
-        name: "NavHeader"
+        name: "NavHeader",
+        data() {
+            return {
+                userInfo: {},
+                userId: null
+            }
+        },
+        mounted() {
+            this.userId = this.$store.state.user.userId
+            this.userInfo = this.$store.state.user.userInfo
+        }
     }
 </script>
 

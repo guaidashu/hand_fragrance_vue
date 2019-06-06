@@ -449,7 +449,15 @@
 
     export default {
         name: "index",
-        components: {NavFooter, NavHeader}
+        components: {NavFooter, NavHeader},
+        methods: {
+            init() {
+                // console.log(this.$store.state.user.userInfo)
+            }
+        },
+        mounted() {
+            this.init()
+        }
     }
 </script>
 

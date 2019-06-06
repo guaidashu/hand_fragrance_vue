@@ -32,6 +32,7 @@
     import NavFooter from "../components/NavFooter";
     import validate from "../../libs/validate";
     import {register} from "../../../api/login"
+    import {printError} from "../../util/printError";
 
     export default {
         name: "register",
@@ -131,11 +132,7 @@
                         // }
                         console.log(data.result)
                     } else {
-                        for (let i in data.msg) {
-                            for (let j = 0; j < data.msg[i].length; j++) {
-                                this.$Message.error(data.msg[i][j])
-                            }
-                        }
+                        printError(this, data)
                     }
                 })
             }

@@ -55,7 +55,7 @@
 
                 <div class="col-md-1">
                     <a class="btn btn-outline"
-                       href="#modal">
+                       href="javascript:;" @click="showSureModal">
                         赠送此书
                     </a>
                 </div>
@@ -136,25 +136,38 @@
             </div>
 
 
-            <div class="remodal" data-remodal-id="modal" role="dialog"
-                 aria-labelledby="modal1Title" aria-describedby="modal1Desc"
-                 data-remodal-options="closeOnOutsideClick: false">
-                <button data-remodal-action="close" class="remodal-close"
-                        aria-label="Close"></button>
-                <div>
-                    <h5 class="diag-title">
-                        您确定拥有《东京奇谭集》这本书吗？</h5>
-                    <p id="modal1Desc" class="description-font">
-                        如果您不想赠送此书，或者没有这本书，请不要随意发布虚假信息。谢谢你的支持和理解。
-                    </p>
-                </div>
-                <br>
-                <button data-remodal-action="confirm" class="remodal-confirm">确定赠送</button>
-                <button data-remodal-action="cancel" class="remodal-cancel">不，算了</button>
-            </div>
+            <!--            <div class="remodal" data-remodal-id="modal" role="dialog"-->
+            <!--                 aria-labelledby="modal1Title" aria-describedby="modal1Desc"-->
+            <!--                 data-remodal-options="closeOnOutsideClick: false">-->
+            <!--                <button data-remodal-action="close" class="remodal-close"-->
+            <!--                        aria-label="Close"></button>-->
+            <!--                <div>-->
+            <!--                    <h5 class="diag-title">-->
+            <!--                        您确定拥有《东京奇谭集》这本书吗？</h5>-->
+            <!--                    <p id="modal1Desc" class="description-font">-->
+            <!--                        如果您不想赠送此书，或者没有这本书，请不要随意发布虚假信息。谢谢你的支持和理解。-->
+            <!--                    </p>-->
+            <!--                </div>-->
+            <!--                <br>-->
+            <!--                <button data-remodal-action="confirm" class="remodal-confirm">确定赠送</button>-->
+            <!--                <button data-remodal-action="cancel" class="remodal-cancel">不，算了</button>-->
+            <!--            </div>-->
 
         </div>
         <nav-footer></nav-footer>
+        <Modal title="赠送确认" v-model="sureModal">
+            <div>
+                <h5 class="diag-title">
+                    您确定拥有《东京奇谭集》这本书吗？</h5>
+                <p id="modal1Desc" class="description-font">
+                    如果您不想赠送此书，或者没有这本书，请不要随意发布虚假信息。谢谢你的支持和理解。
+                </p>
+            </div>
+            <div slot="footer">
+                <Button type="primary" style="color: #ffffff;" size="large" @click="sureSend">确定赠送</Button>
+                <Button type="error" style="color: #ffffff;" size="large" @click="closeSureModal">不，算了</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -162,13 +175,16 @@
     import NavHeader from "../components/NavHeader";
     import NavFooter from "../components/NavFooter";
     import {getBookInfo} from "../../../api/books";
+    import {printError} from "../../util/printError";
+    import {sureSend} from "../../../api/gift";
 
     export default {
         name: "detail",
         components: {NavFooter, NavHeader},
         data() {
             return {
-                book: {}
+                book: {},
+                sureModal: false
             }
         },
         methods: {
@@ -181,7 +197,6 @@
                     let data = res.data
                     if (data.code === 0) {
                         this.book = data.result
-                        console.log(this.book)
                     } else {
                         this.$Message.error(data.msg)
                     }
@@ -193,6 +208,23 @@
                 } catch (e) {
 
                 }
+            },
+            sureSend() {
+                sureSend({isbn: this.book.isbn}).then(res=> {
+                    let data = res.data
+                    if (data.code === 0) {
+                        this.$Message.success("已添加到赠送清单")
+                        this.closeSureModal()
+                    }else {
+                        printError(this, data)
+                    }
+                })
+            },
+            showSureModal() {
+                this.sureModal = true
+            },
+            closeSureModal() {
+                this.sureModal = false
             }
         },
         mounted() {
@@ -205,6 +237,7 @@
     @import "../../../static/css/bootstrap.min.css";
     @import '../../../static/css/index.css';
     @import '../../../static/css/base.css';
+
     html.remodal-is-locked {
         overflow: hidden;
 

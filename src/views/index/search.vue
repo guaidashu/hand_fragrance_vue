@@ -28,6 +28,7 @@
             </div>
             <div style="width: 100%; height: 30px;"></div>
             <Page :total="books.total" :current="page" @on-change="p => {this.page = p}" :page-size="pageSize"></Page>
+            <Spin size="large" fix v-if="searchLoading"></Spin>
         </div>
         <nav-footer></nav-footer>
     </div>
@@ -37,6 +38,7 @@
     import NavHeader from "../components/NavHeader";
     import {searchBooks} from "../../../api/books";
     import NavFooter from "../components/NavFooter";
+    import {printError} from "../../util/printError";
 
     export default {
         name: "search",
@@ -45,7 +47,8 @@
             return {
                 books: [],
                 page: 1,
-                pageSize: 15
+                pageSize: 15,
+                searchLoading: false
             }
         },
         methods: {
@@ -57,13 +60,15 @@
                 if (!q) {
                     return
                 }
+                this.searchLoading = true
                 searchBooks({q: q, page: this.page}).then(res => {
                     let data = res.data
                     if (data.code === 0) {
                         this.books = data.result
                     } else {
-                        this.$Message.error(data.msg)
+                        printError(this, data.msg)
                     }
+                    this.searchLoading = false
                 })
             },
             goDetail(book) {
