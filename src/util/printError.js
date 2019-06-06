@@ -7,12 +7,12 @@ export function printError(self, data) {
     if (typeof data.msg == "object") {
         if (typeof data.msg.length == 'number') {
             for (let j = 0; j < data.msg.length; j++) {
-                self.$Message.error(data.msg[j])
+                printError(self, {msg: data.msg[j]})
             }
         } else {
             for (let i in data.msg) {
                 for (let j = 0; j < data.msg[i].length; j++) {
-                    self.$Message.error(data.msg[i][j])
+                    printError(self, data.msg[i][j])
                 }
             }
         }
