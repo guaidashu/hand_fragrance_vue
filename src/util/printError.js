@@ -12,7 +12,7 @@ export function printError(self, data) {
         } else {
             for (let i in data.msg) {
                 for (let j = 0; j < data.msg[i].length; j++) {
-                    printError(self, data.msg[i][j])
+                    printError(self, {msg: data.msg[i][j]})
                 }
             }
         }
