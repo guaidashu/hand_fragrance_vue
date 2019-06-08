@@ -12,3 +12,7 @@ export const getRecentBooks = () => {
 export const getMyGifts = () => {
     return axios.request({url: '/api/gifts/my_gift', method: 'post'})
 };
+
+export const removeGift = (post) => {
+    return axios.request({url: '/api/gifts/redraw', method: 'post', data: Qs.stringify(post)})
+};

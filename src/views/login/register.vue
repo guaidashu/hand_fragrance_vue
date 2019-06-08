@@ -130,7 +130,7 @@
                         //     rePassword: '',
                         //     email: ''
                         // }
-                        console.log(data.result)
+                        // console.log(data.result)
                     } else {
                         printError(this, data)
                     }

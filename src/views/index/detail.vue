@@ -196,6 +196,7 @@
                     let data = res.data
                     if (data.code === 0) {
                         this.$Message.success("已添加到赠送清单")
+                        this.init()
                         this.closeSureModal()
                     } else {
                         printError(this, data)
@@ -207,6 +208,7 @@
                     let data = res.data
                     if (data.code === 0) {
                         this.$Message.success("成功添加到心愿清单")
+                        this.init()
                     } else {
                         printError(this, data)
                     }

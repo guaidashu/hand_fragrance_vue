@@ -32,13 +32,13 @@
                                     <span id="isbn">{{item.book.isbn}}</span>
                                 </div>
                                 <a class="link-normal"
-                                   href="/gifts/734/redraw">
+                                   href="javascript:;" @click="removeGift(item.id)">
                                     撤销
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-3 flex-vertical" style="padding: 0">
-                            <a href="/book/9787544707923/detail">
+                            <a :href="'/detail?isbn=' + item.book.isbn">
                                 <span class="bg-info">{{item.wishes_count}}人想要</span>
                             </a>
                         </div>
@@ -54,7 +54,7 @@
 <script>
     import NavFooter from "../components/NavFooter";
     import NavHeader from "../components/NavHeader";
-    import {getMyGifts} from "../../../api/gift";
+    import {getMyGifts, removeGift} from "../../../api/gift";
 
     export default {
         name: "gifts",
@@ -80,6 +80,17 @@
                         this.searchLoading = false
                     } else {
                         console.log(data.msg)
+                    }
+                })
+            },
+            removeGift(id) {
+                removeGift({id: id}).then(res => {
+                    let data = res.data
+                    if (data.code === 0) {
+                        this.$Message.success("移除成功")
+                        this.init()
+                    } else {
+                        this.$Message.error(data.msg)
                     }
                 })
             }

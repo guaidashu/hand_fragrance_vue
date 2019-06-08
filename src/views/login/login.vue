@@ -80,22 +80,23 @@
                     this.$Message.error("请输入用户名和密码")
                     return
                 }
+                let self = this
                 login(this.form).then(res => {
                     let data = res.data
                     if (data.code === 0) {
                         console.log("登录成功")
-                        this.$store.dispatch("getUserInfo")
-                        if (!this.$store.state.user.fromUrl || this.$store.state.user.fromUrl == "/login") {
-                            this.$router.push({
-                                path: '/'
-                            })
-                        }else {
-                            this.$router.push({
-                                path: this.$store.state.user.fromUrl,
-                                query: this.$store.state.user.fromQuery
-                            })
-                        }
-
+                        this.$store.dispatch("getUserInfo", function (context) {
+                            if (!context.fromUrl || context.fromUrl == "/login") {
+                                self.$router.push({
+                                    path: '/'
+                                })
+                            } else {
+                                self.$router.push({
+                                    path: context.fromUrl,
+                                    query: context.fromQuery
+                                })
+                            }
+                        })
                     } else {
                         this.$Message.error(data.msg)
                     }

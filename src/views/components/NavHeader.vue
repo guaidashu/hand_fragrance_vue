@@ -96,6 +96,7 @@
                 })
             },
             logout() {
+                console.log("注销")
                 logout().then(res => {
                     let data = res.data
                     if (data.code === 0) {
@@ -105,6 +106,7 @@
                             path: '/'
                         })
                     }
+                    this.$router.go(0)
                 })
             }
         },

@@ -22,16 +22,21 @@ export default {
         },
         setUserInfo(state, userInfo) {
             state.userInfo = userInfo
+        },
+        goPage(state) {
+
         }
     },
     getters: {},
     actions: {
-        getUserInfo(context) {
+        getUserInfo(context, func) {
             getUserInfo().then(res => {
                 let data = res.data
                 if (data.code === 0) {
                     context.commit("setUserInfo", data.result)
                     context.commit("setUserId", data.result.id)
+
+                    func(context)
                 }
             })
         }
