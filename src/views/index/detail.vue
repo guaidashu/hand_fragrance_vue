@@ -16,7 +16,7 @@
                     <div class="description-font-margin">
                         <div>
                             <span>作者:</span>
-                            <span>{{ getAuthor(book.author) }}</span>
+                            <span>{{ book.author | getAuthor }}</span>
                         </div>
                         <div>
                             <span>出版社:</span>
@@ -44,8 +44,8 @@
                         </div>
 
                         <div class="color-count">
-                            <span>2人想要 / </span>
-                            <span>4人可赠送</span>
+                            <span>{{wish.total}}人想要 / </span>
+                            <span>{{gift.total}}人可赠送</span>
                         </div>
 
                     </div>
@@ -53,20 +53,27 @@
             </div>
             <div style="margin-top:30px; display: flex" class="row ">
 
-                <div class="col-md-1">
+                <div class="col-md-1" v-if="!book.is_in_gift && !book.is_in_wish">
                     <a class="btn btn-outline"
                        href="javascript:;" @click="showSureModal">
                         赠送此书
                     </a>
                 </div>
-                <div class="col-md-1 add-name">
+                <div class="col-md-3" v-if="book.is_in_gift && !book.is_in_wish">
+                    <span class="bg-info">已添加至赠送清单</span>
+                </div>
+                <div class="col-md-1 add-name" v-if="!book.is_in_gift && !book.is_in_wish">
                     <a class="btn btn-outline"
-                       href="/wish/book/9787532740536">
+                       href="javascript:;" @click="addWish">
                         加入到心愿清单
                     </a>
                 </div>
+                <div class="col-md-3" v-if="!book.is_in_gift && book.is_in_wish">
+                    <span class="bg-info">已添加至心愿清单</span>
+                </div>
 
             </div>
+
             <div style="margin-top: 30px;" class="row">
                 <div class="col-md-2"><span class="description-title">内容简介</span></div>
             </div>
@@ -78,87 +85,64 @@
                 </div>
             </div>
 
-            <div style="margin-top:30px; display: flex" class="row">
+            <div style="margin-top:30px; display: flex" class="row" v-if="!book.is_in_wish && !book.is_in_gift">
                 <div class="col-md-3"><span class="description-title">向他们请求此书</span></div>
+            </div>
+
+            <div style="margin-top:30px; display: flex" class="row" v-if="book.is_in_wish && !book.is_in_gift">
+                <div class="col-md-3"><span class="description-title">向他们请求此书</span></div>
+            </div>
+
+            <div style="margin-top:30px; display: flex" class="row" v-if="book.is_in_gift && !book.is_in_wish">
+                <div class="col-md-3"><span class="description-title">向他们赠送此书</span></div>
             </div>
             <hr style="margin-top:5px;"/>
 
-            <div style="margin-top:30px; display: flex" class="row">
+<!--            默认状态显示赠送的数据-->
+            <div v-if="!book.is_in_wish && !book.is_in_gift" v-for="(item, index) in gift.trades" :key="index" style="margin-top:30px; display: flex" class="row">
                 <div class="col-md-1" style="width: 11em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                    leet2
+                    {{item.nickname}}
                 </div>
                 <div class="col-md-2 description-font">
-                    上传于2018-09-17
+                    上传于{{item.time}}
                 </div>
                 <div class="col-md-2">
                     <a class="btn-normal"
-                       href="/drift/455">向他请求此书</a>
+                       :href="'/drift?id='  + item.id">向他请求此书</a>
                 </div>
             </div>
 
-            <div style="margin-top:30px; display: flex" class="row">
+            <div v-if="book.is_in_wish && !book.is_in_gift" v-for="(item, index) in gift.trades" :key="index" style="margin-top:30px; display: flex" class="row">
                 <div class="col-md-1" style="width: 11em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                    ivan
+                    {{item.nickname}}
                 </div>
                 <div class="col-md-2 description-font">
-                    上传于2018-09-18
+                    上传于{{item.time}}
                 </div>
                 <div class="col-md-2">
                     <a class="btn-normal"
-                       href="/drift/460">向他请求此书</a>
+                       :href="'/drift?id='  + item.id">向他请求此书</a>
                 </div>
             </div>
 
-            <div style="margin-top:30px; display: flex" class="row">
+            <div v-if="book.is_in_gift && !book.is_in_wish" v-for="(item, index) in wish.trades" :key="index" style="margin-top:30px; display: flex" class="row">
                 <div class="col-md-1" style="width: 11em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                    八月
+                    {{item.nickname}}
                 </div>
                 <div class="col-md-2 description-font">
-                    上传于2019-04-05
+                    上传于{{item.time}}
                 </div>
                 <div class="col-md-2">
                     <a class="btn-normal"
-                       href="/drift/476">向他请求此书</a>
+                       :href="'/drift?id='  + item.id">向他赠送此书</a>
                 </div>
             </div>
-
-            <div style="margin-top:30px; display: flex" class="row">
-                <div class="col-md-1" style="width: 11em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                    iceberg
-                </div>
-                <div class="col-md-2 description-font">
-                    上传于2019-05-27
-                </div>
-                <div class="col-md-2">
-                    <a class="btn-normal"
-                       href="/drift/730">向他请求此书</a>
-                </div>
-            </div>
-
-
-            <!--            <div class="remodal" data-remodal-id="modal" role="dialog"-->
-            <!--                 aria-labelledby="modal1Title" aria-describedby="modal1Desc"-->
-            <!--                 data-remodal-options="closeOnOutsideClick: false">-->
-            <!--                <button data-remodal-action="close" class="remodal-close"-->
-            <!--                        aria-label="Close"></button>-->
-            <!--                <div>-->
-            <!--                    <h5 class="diag-title">-->
-            <!--                        您确定拥有《东京奇谭集》这本书吗？</h5>-->
-            <!--                    <p id="modal1Desc" class="description-font">-->
-            <!--                        如果您不想赠送此书，或者没有这本书，请不要随意发布虚假信息。谢谢你的支持和理解。-->
-            <!--                    </p>-->
-            <!--                </div>-->
-            <!--                <br>-->
-            <!--                <button data-remodal-action="confirm" class="remodal-confirm">确定赠送</button>-->
-            <!--                <button data-remodal-action="cancel" class="remodal-cancel">不，算了</button>-->
-            <!--            </div>-->
-
         </div>
         <nav-footer></nav-footer>
         <Modal title="赠送确认" v-model="sureModal">
             <div>
                 <h5 class="diag-title">
-                    您确定拥有《东京奇谭集》这本书吗？</h5>
+                    您确定拥有《{{book.title}}》这本书吗？</h5>
                 <p id="modal1Desc" class="description-font">
                     如果您不想赠送此书，或者没有这本书，请不要随意发布虚假信息。谢谢你的支持和理解。
                 </p>
@@ -177,6 +161,7 @@
     import {getBookInfo} from "../../../api/books";
     import {printError} from "../../util/printError";
     import {sureSend} from "../../../api/gift";
+    import {addWish} from "../../../api/wish";
 
     export default {
         name: "detail",
@@ -184,7 +169,9 @@
         data() {
             return {
                 book: {},
-                sureModal: false
+                sureModal: false,
+                gift: {},
+                wish: {}
             }
         },
         methods: {
@@ -197,25 +184,30 @@
                     let data = res.data
                     if (data.code === 0) {
                         this.book = data.result
+                        this.gift = this.book.gift
+                        this.wish = this.book.wish
                     } else {
                         this.$Message.error(data.msg)
                     }
                 })
             },
-            getAuthor(author) {
-                try {
-                    return author.join(', ')
-                } catch (e) {
-
-                }
-            },
             sureSend() {
-                sureSend({isbn: this.book.isbn}).then(res=> {
+                sureSend({isbn: this.book.isbn}).then(res => {
                     let data = res.data
                     if (data.code === 0) {
                         this.$Message.success("已添加到赠送清单")
                         this.closeSureModal()
-                    }else {
+                    } else {
+                        printError(this, data)
+                    }
+                })
+            },
+            addWish() {
+                addWish({isbn: this.book.isbn}).then(res => {
+                    let data = res.data
+                    if (data.code === 0) {
+                        this.$Message.success("成功添加到心愿清单")
+                    } else {
                         printError(this, data)
                     }
                 })

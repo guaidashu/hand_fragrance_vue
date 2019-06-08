@@ -85,7 +85,7 @@
                     if (data.code === 0) {
                         console.log("登录成功")
                         this.$store.dispatch("getUserInfo")
-                        if (!this.$store.state.user.fromUrl) {
+                        if (!this.$store.state.user.fromUrl || this.$store.state.user.fromUrl == "/login") {
                             this.$router.push({
                                 path: '/'
                             })

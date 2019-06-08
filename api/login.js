@@ -8,3 +8,7 @@ export const login = (post) => {
 export const register = (post) => {
     return axios.request({url: '/api/user/register', method: 'post', data: Qs.stringify(post)})
 };
+
+export const logout = () => {
+    return axios.request({url: '/api/user/logout', method: 'post'})
+};

@@ -5,7 +5,8 @@
                 <form class="form-inline" action="/search" method="get">
                     <div class="flex-vertical-center-height">
                         <div class="col-md-2  col-xs-3 logo">
-                            <img src="/static/images/index/logo-yushu.png" width="69px" height="46px">
+                            <img src="/static/images/index/logo-yushu.png" style="cursor: pointer;" width="69px"
+                                 height="46px" @click="goIndex">
                         </div>
                         <div style="margin-left:20px;" class="col-md-7  col-xs-6 input-group">
                             <input name="q" type="text" placeholder="ISBN、图书名称" class="form-control input-sm">
@@ -18,11 +19,13 @@
 
                             <div class="container-height flex-vertical-center login-box">
 
-                                <div style="height: 100%; width: 100%;display: flex; justify-content: flex-end; align-items: center" v-if="userId">
+                                <div style="height: 100%; width: 100%;display: flex; justify-content: flex-end; align-items: center"
+                                     v-if="userId">
                                     <a href="javascript:;">{{userInfo.nickname}}</a>
-                                    <a class="btn-end" href="javascript:;">退出</a>
+                                    <a class="btn-end" href="javascript:;" @click="logout">注销</a>
                                 </div>
-                                <div style="height: 100%; width: 100%;display: flex; justify-content: flex-end; align-items: center" v-else>
+                                <div style="height: 100%; width: 100%;display: flex; justify-content: flex-end; align-items: center"
+                                     v-else>
                                     <a href="/login">登录</a>
                                     <a class="btn-end" href="/register">注册</a>
                                 </div>
@@ -75,6 +78,8 @@
 </template>
 
 <script>
+    import {logout} from "../../../api/login";
+
     export default {
         props: ['linking'],
         name: "NavHeader",
@@ -82,6 +87,25 @@
             return {
                 userInfo: {},
                 userId: null
+            }
+        },
+        methods: {
+            goIndex() {
+                this.$router.push({
+                    path: '/'
+                })
+            },
+            logout() {
+                logout().then(res => {
+                    let data = res.data
+                    if (data.code === 0) {
+                        this.$store.commit("setUserId", '')
+                        this.$store.commit("setUserInfo", {})
+                        this.$router.push({
+                            path: '/'
+                        })
+                    }
+                })
             }
         },
         mounted() {

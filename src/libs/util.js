@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-export const TOKEN_KEY = 'session'
+export const TOKEN_KEY = 'remember_token'
 
 // 获取存储到cookie的 用户信息 session
 export const getToken = () => {

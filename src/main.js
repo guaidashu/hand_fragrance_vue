@@ -7,9 +7,11 @@ import store from '../store'
 import 'iview/dist/styles/iview.css';
 import iview from 'iview'
 import {currency} from "./util/currency";
+import {getAuthor} from "./util/getAuthor";
 
 Vue.use(iview)
 Vue.filter("currency", currency)
+Vue.filter("getAuthor", getAuthor)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -12,18 +12,18 @@
                         <div class="row">
                             <div class="col-md-12 text-center bg-head">
                         <span class="drift-title">向<span
-                                class="space">杰西</span>请求这本书</span>
+                                class="space">{{giftUser.nickname}}</span>请求这本书</span>
                             </div>
                         </div>
                         <div style="margin-top:15px;" class="row">
                             <div class="col-md-10 col-md-offset-1 flex-vertical gifter-container">
                                 <span class="sub-title-color">以下是书籍拥有者信息，诚信度供你参考:</span>
-                                <span style="margin-top:10px; margin-bottom:10px;">杰西</span>
+                                <span style="margin-top:10px; margin-bottom:10px;">{{giftUser.nickname}}</span>
                                 <div><span
-                                        class="description-font">鱼豆：</span><span>1.0</span>
+                                        class="description-font">鱼豆：</span><span>{{giftUser.beans}}</span>
                                 </div>
                                 <div><span
-                                        class="description-font">接受/送出书籍：</span><span>0/0</span>
+                                        class="description-font">接受/送出书籍：</span><span>{{giftUser.receive_counter}}/{{giftUser.send_counter}}</span>
                                 </div>
                             </div>
                         </div>
@@ -85,10 +85,36 @@
 <script>
     import NavHeader from "../components/NavHeader";
     import NavFooter from "../components/NavFooter";
+    import {getGiftUserInfo} from "../../../api/drift";
 
     export default {
         name: "drift",
-        components: {NavFooter, NavHeader}
+        components: {NavFooter, NavHeader},
+        data() {
+            return {
+                gift: {},
+                giftUser: {}
+            }
+        },
+        methods: {
+            init() {
+                this.getGiftUserInfo()
+            },
+            getGiftUserInfo() {
+                getGiftUserInfo({id: this.$route.query.id}).then(res => {
+                    let data = res.data
+                    if (data.code === 0) {
+                        this.gift = data.result
+                        this.giftUser = this.gift.user
+                    } else {
+                        console.log(data.msg)
+                    }
+                })
+            }
+        },
+        mounted() {
+            this.init()
+        }
     }
 </script>
 
@@ -96,6 +122,7 @@
     @import "../../../static/css/bootstrap.min.css";
     @import '../../../static/css/index.css';
     @import '../../../static/css/base.css';
+
     .drift-title {
         font-size: 29px;
         color: #ffffff;

@@ -19,9 +19,6 @@ let checkTools = {
 };
 
 let check = {
-    checkLogin(store) {
-        return store.state.user.userId
-    },
     // 登录拦截检查前端的页面是否放行
     checkUrl(url, urls) {
         if (!urls) {

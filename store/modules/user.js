@@ -19,7 +19,6 @@ export default {
         },
         setFromQuery(state, query) {
             state.fromQuery = query
-            console.log(query)
         },
         setUserInfo(state, userInfo) {
             state.userInfo = userInfo
@@ -31,7 +30,6 @@ export default {
             getUserInfo().then(res => {
                 let data = res.data
                 if (data.code === 0) {
-                    console.log(data.result)
                     context.commit("setUserInfo", data.result)
                     context.commit("setUserId", data.result.id)
                 }

@@ -72,7 +72,6 @@
                 })
             },
             goDetail(book) {
-                console.log(book)
                 this.$router.push({
                     path: '/detail',
                     query: {
